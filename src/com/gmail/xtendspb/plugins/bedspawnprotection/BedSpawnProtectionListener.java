@@ -16,7 +16,7 @@ public class BedSpawnProtectionListener implements Listener{
 		if(player.getBedSpawnLocation() != null){
 			if(player.getKiller() instanceof Player && player.getLocation().distance(player.getBedSpawnLocation()) < 8){
 					Player killer = player.getKiller();
-					killer.sendMessage(ChatColor.YELLOW + "Dont kill players on the bed respawn!");
+					killer.sendMessage(ChatColor.RED + "Dont kill players on the bed respawn!");
 					killer.damage(10);
 			}
 			

@@ -1,0 +1,5 @@
+main: com.gmail.xtendspb.plugins.bedspawnprotection.BedSpawnProtection
+name: BedSpawnProtection
+version: 1.1DE
+authors: [xtend, Dinnerspond_]
+description: Protects Players From Bed Killers [DinnerEdition]

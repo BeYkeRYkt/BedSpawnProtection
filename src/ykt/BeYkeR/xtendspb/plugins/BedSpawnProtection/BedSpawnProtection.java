@@ -1,4 +1,4 @@
-package com.gmail.xtendspb.plugins.bedspawnprotection;
+package ykt.BeYkeR.xtendspb.plugins.BedSpawnProtection;
 
 
 import java.io.File;
@@ -19,10 +19,14 @@ public class BedSpawnProtection extends JavaPlugin{
 			FileConfiguration fc = getConfig();
 			if (!new File(getDataFolder(), "config.yml").exists()) {
 				fc.options().header("BedSpawnProtection v" + pdFile.getVersion() + " Configuration" + 
-				    "\nOriginal Code: XtenD" +
-					"\nModded Dinnerspond_");
+				    "\nOriginal Code: XtenD (ext4)" +
+					"\nModded Dinnerspond_ (BeYkeR)");
+				fc.options().header("Если поставите 'Save-Zone' на true, отключится урон возле кровати от игроков, если false то действует 'Potion-effect-enable'");
+				fc.addDefault("Save-Zone", false);
+				fc.addDefault("Debug", true);
 				fc.addDefault("Radius-protection", 8);
 				fc.addDefault("Potion-effect-enable", true);
+				fc.options().header("'ONE' - Действие одного зелья, LIST - Действие нескольких зелий из 'Potion-list'");
 				fc.addDefault("Potion-amount", "ONE");
 				fc.addDefault("Potion-effect-name", "CONFUSION");
 				fc.addDefault("Potion-effect-time", 60);
@@ -31,7 +35,7 @@ public class BedSpawnProtection extends JavaPlugin{
 				List<String> list = fc.getStringList("Potion-list");
 				list.add("CONFUSION");
 				list.add("BLINDNESS");
-                                fc.set("Potion-list", list);
+                fc.set("Potion-list", list);
 				//End
 				fc.addDefault("Locale.warning-killer", "Не убивай игроков возле их кровати!");
 				
@@ -44,9 +48,12 @@ public class BedSpawnProtection extends JavaPlugin{
 		}
 		//Register Events
 		getServer().getPluginManager().registerEvents(new BedSpawnProtectionListener(), this);
-		
+		if(this.getConfig().getBoolean("Debug")){
+		this.getLogger().info("[DEBUG]Listener is enabled!");
+		}
 		this.getLogger().info("Plugin is Enabled!");
 	}
 
 
 }
+

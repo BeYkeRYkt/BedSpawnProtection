@@ -1,4 +1,4 @@
-main: com.gmail.xtendspb.plugins.bedspawnprotection.BedSpawnProtection
+main: ykt.BeYkeRYkt.xtendspb.plugins.bedspawnprotection.BedSpawnProtection
 name: BedSpawnProtection
 version: 1.1DE
 authors: [xtend, Dinnerspond_]

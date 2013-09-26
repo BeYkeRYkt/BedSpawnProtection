@@ -1,4 +1,4 @@
-main: ykt.BeYkeR.xtendspb.plugins.bedspawnprotection.BedSpawnProtection
+main: ykt.BeYkeR.xtendspb.plugins.BedSpawnProtection.BedSpawnProtection
 name: BedSpawnProtection
 version: 1.1DE
 authors: [xtend, Dinnerspond_]

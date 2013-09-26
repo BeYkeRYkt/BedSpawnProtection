@@ -20,13 +20,14 @@ public class BedSpawnProtection extends JavaPlugin{
 			if (!new File(getDataFolder(), "config.yml").exists()) {
 				fc.options().header("BedSpawnProtection v" + pdFile.getVersion() + " Configuration" + 
 				    "\nOriginal Code: XtenD (ext4)" +
-					"\nModded Dinnerspond_ (BeYkeR)");
-				fc.options().header("Если поставите 'Save-Zone' на true, отключится урон возле кровати от игроков, если false то действует 'Potion-effect-enable'");
+					"\nModded Dinnerspond_ (BeYkeR)"+ 
+					"\nЕсли поставите 'Save-Zone' на true, отключится урон возле кровати от игроков, если false то действует 'Potion-effect-enable'" +
+					"\n'ONE' - Действие одного зелья, LIST - Действие нескольких зелий из 'Potion-list'"
+					);
 				fc.addDefault("Save-Zone", false);
 				fc.addDefault("Debug", true);
 				fc.addDefault("Radius-protection", 8);
 				fc.addDefault("Potion-effect-enable", true);
-				fc.options().header("'ONE' - Действие одного зелья, LIST - Действие нескольких зелий из 'Potion-list'");
 				fc.addDefault("Potion-amount", "ONE");
 				fc.addDefault("Potion-effect-name", "CONFUSION");
 				fc.addDefault("Potion-effect-time", 60);
@@ -47,7 +48,7 @@ public class BedSpawnProtection extends JavaPlugin{
 			e.printStackTrace();
 		}
 		//Register Events
-		getServer().getPluginManager().registerEvents(new BedSpawnProtectionListener(), this);
+		getServer().getPluginManager().registerEvents(new BedSpawnProtectionListener(this), this);
 		if(this.getConfig().getBoolean("Debug")){
 		this.getLogger().info("[DEBUG]Listener is enabled!");
 		}

@@ -21,19 +21,25 @@ public class BedSpawnProtectionListener implements Listener{
 	public BedSpawnProtection plugin;
 	public ArrayList<String> players = new ArrayList <String>();
 
+	
+	public BedSpawnProtectionListener(BedSpawnProtection plugin){
+		this.plugin = plugin;
+	}
+	
 	//DamageEvent v1.1-[DEV]
 	@EventHandler
 	public void onPlayerDamage(EntityDamageByEntityEvent event){
 		if(plugin.getConfig().getBoolean("Save-Zone")){
-		Entity entity = event.getEntity();
+			Entity entity = event.getEntity();
 		//Check: Damager instanceof Player
 		if(event.getDamager() instanceof Player){
 			Player player = (Player) entity;
 		//Check: Entity instanceof Player
 		if(entity instanceof Player){
+			Player player2 = (Player) entity;
 			//Check: getBedSpawn
 			if(player.getBedSpawnLocation() != null){
-			if(player.getLocation().distance(player.getBedSpawnLocation()) < plugin.getConfig().getDouble("Radius-protection")){
+			if(player.getLocation().distance(player.getBedSpawnLocation()) < plugin.getConfig().getDouble("Radius-protection") || player2.getLocation().distance(player2.getBedSpawnLocation()) < plugin.getConfig().getDouble("Radius-protection")){
 				//Damage Canceled
 				event.setCancelled(true);
 				event.setDamage(0);
@@ -71,16 +77,15 @@ public class BedSpawnProtectionListener implements Listener{
 //Death Event v1.0
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event){
-		Player player = event.getEntity();
 		if(!plugin.getConfig().getBoolean("Save-Zone")){
+		Player player = event.getEntity();
 		if(player.getBedSpawnLocation() != null){
 			if(player.getKiller() instanceof Player && player.getLocation().distance(player.getBedSpawnLocation()) < plugin.getConfig().getDouble("Radius-protection")){
 					Player killer = player.getKiller();
 					
 					//Message to Console
 					plugin.getLogger().info("Player " + player.getName() + " killed by " + killer.getName());
-					
-					
+
 					//Message
 					String message = plugin.getConfig().getString("Locale.warning-killer");
 					killer.sendMessage(ChatColor.RED + message);
